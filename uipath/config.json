@@ -1,0 +1,120 @@
+{
+  "description": "UiPath Integration Configuration for DentFlow Dental Clinic Automation",
+  "apiBaseUrl": "http://localhost:3001/api",
+  "apiKey": "demo-key",
+  "endpoints": {
+    "pendingReminders": {
+      "method": "GET",
+      "url": "/uipath/pending-reminders",
+      "description": "Returns appointments that need reminders sent. Each item is a transaction for REFramework.",
+      "headers": {
+        "X-UiPath-Key": "{{ApiKey}}"
+      },
+      "responseFormat": {
+        "TransactionItems": "Array of appointment objects",
+        "Count": "Number of pending items"
+      }
+    },
+    "sendReminder": {
+      "method": "POST",
+      "url": "/reminders/send/{{AppointmentID}}",
+      "description": "Sends a reminder for a specific appointment via the patient's preferred channel.",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-UiPath-Key": "{{ApiKey}}"
+      },
+      "body": {
+        "type": "24h"
+      }
+    },
+    "updateStatus": {
+      "method": "POST",
+      "url": "/uipath/update-status",
+      "description": "Updates an appointment's status after UiPath processes it.",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-UiPath-Key": "{{ApiKey}}"
+      },
+      "body": {
+        "appointmentId": "{{AppointmentID}}",
+        "status": "Confirmed",
+        "notes": "Processed by UiPath bot"
+      }
+    },
+    "logException": {
+      "method": "POST",
+      "url": "/uipath/log-exception",
+      "description": "Logs an exception encountered during UiPath workflow execution.",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-UiPath-Key": "{{ApiKey}}"
+      },
+      "body": {
+        "appointmentId": "{{AppointmentID}}",
+        "errorType": "BusinessException",
+        "errorMessage": "{{ErrorMessage}}",
+        "timestamp": "{{Timestamp}}"
+      }
+    },
+    "dailySheet": {
+      "method": "GET",
+      "url": "/uipath/daily-sheet",
+      "description": "Returns today's appointments in a flat format suitable for Excel export.",
+      "headers": {
+        "X-UiPath-Key": "{{ApiKey}}"
+      }
+    },
+    "createAppointment": {
+      "method": "POST",
+      "url": "/appointments",
+      "description": "Creates a new appointment (used by Excel Reader Bot).",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "patientId": "{{PatientID}}",
+        "patientName": "{{PatientName}}",
+        "date": "{{Date}}",
+        "time": "{{Time}}",
+        "duration": 30,
+        "dentistName": "{{DentistName}}",
+        "treatmentType": "{{TreatmentType}}",
+        "notes": "Imported from Excel by UiPath"
+      }
+    }
+  },
+  "orchestratorAssets": [
+    {
+      "name": "ApiBaseUrl",
+      "type": "Text",
+      "value": "http://localhost:3001/api"
+    },
+    {
+      "name": "ApiKey",
+      "type": "Text",
+      "value": "demo-key"
+    },
+    {
+      "name": "TwilioCredentials",
+      "type": "Credential",
+      "description": "Username = TWILIO_ACCOUNT_SID, Password = TWILIO_AUTH_TOKEN"
+    }
+  ],
+  "scheduleTriggers": [
+    {
+      "name": "Morning Sync",
+      "cron": "0 8 * * 1-6",
+      "description": "Run Excel Reader Bot at 8 AM, Sat-Thu"
+    },
+    {
+      "name": "Reminder Dispatch",
+      "cron": "0 */2 * * 1-6",
+      "description": "Run Main Dispatcher every 2 hours, Sat-Thu"
+    },
+    {
+      "name": "Calendar Sync",
+      "cron": "0 9 * * 1-6",
+      "description": "Sync confirmed appointments to Google Calendar at 9 AM"
+    }
+  ]
+}

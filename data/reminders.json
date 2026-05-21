@@ -1,0 +1,38 @@
+[
+  {
+    "reminderId": "REM-MPFLJV186S8S",
+    "appointmentId": "APT-20260521-3380",
+    "patientId": "PAT-003",
+    "patientName": "John Smith",
+    "channel": "WhatsApp",
+    "type": "24h",
+    "sentAt": "2026-05-20T14:39:19.771Z",
+    "status": "Delivered",
+    "messageContent": "Reminder: Your dental appointment is tomorrow.",
+    "retryCount": 0
+  },
+  {
+    "reminderId": "REM-MPFLJV18ZWHV",
+    "appointmentId": "APT-20260521-5051",
+    "patientId": "PAT-003",
+    "patientName": "John Smith",
+    "channel": "WhatsApp",
+    "type": "24h",
+    "sentAt": "2026-05-20T14:39:19.771Z",
+    "status": "Delivered",
+    "messageContent": "Reminder: Your dental appointment is tomorrow.",
+    "retryCount": 0
+  },
+  {
+    "reminderId": "REM-MPFLJV18YRT0",
+    "appointmentId": "APT-20260521-4212",
+    "patientId": "PAT-007",
+    "patientName": "Emily Davis",
+    "channel": "SMS",
+    "type": "24h",
+    "sentAt": "2026-05-20T14:39:19.771Z",
+    "status": "Sent",
+    "messageContent": "Reminder: Your dental appointment is tomorrow.",
+    "retryCount": 0
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "patientId": "PAT-001",
+    "fullName": "Ahmed Ali",
+    "phone": "+201012345678",
+    "email": "ahmed@email.com",
+    "language": "AR",
+    "preferredChannel": "WhatsApp",
+    "noShowCount": 1,
+    "totalVisits": 8,
+    "createdAt": "2025-01-15",
+    "isActive": true
+  },
+  {
+    "patientId": "PAT-002",
+    "fullName": "Sara Mohammed",
+    "phone": "+201098765432",
+    "email": "sara@email.com",
+    "language": "AR",
+    "preferredChannel": "SMS",
+    "noShowCount": 0,
+    "totalVisits": 12,
+    "createdAt": "2024-11-20",
+    "isActive": true
+  },
+  {
+    "patientId": "PAT-003",
+    "fullName": "John Smith",
+    "phone": "+14155551234",
+    "email": "john@email.com",
+    "language": "EN",
+    "preferredChannel": "Email",
+    "noShowCount": 3,
+    "totalVisits": 5,
+    "createdAt": "2025-03-10",
+    "isActive": true
+  },
+  {
+    "patientId": "PAT-004",
+    "fullName": "Fatima Hassan",
+    "phone": "+201155556789",
+    "email": "fatima@email.com",
+    "language": "AR",
+    "preferredChannel": "WhatsApp",
+    "noShowCount": 0,
+    "totalVisits": 20,
+    "createdAt": "2024-06-05",
+    "isActive": true
+  },
+  {
+    "patientId": "PAT-005",
+    "fullName": "Mike Johnson",
+    "phone": "+14155559876",
+    "email": "mike@email.com",
+    "language": "EN",
+    "preferredChannel": "SMS",
+    "noShowCount": 4,
+    "totalVisits": 6,
+    "createdAt": "2025-02-28",
+    "isActive": true
+  },
+  {
+    "patientId": "PAT-006",
+    "fullName": "Nour ElDin",
+    "phone": "+201234567890",
+    "email": "nour@email.com",
+    "language": "AR",
+    "preferredChannel": "WhatsApp",
+    "noShowCount": 0,
+    "totalVisits": 15,
+    "createdAt": "2024-09-12",
+    "isActive": true
+  },
+  {
+    "patientId": "PAT-007",
+    "fullName": "Emily Davis",
+    "phone": "+14155554321",
+    "email": "emily@email.com",
+    "language": "EN",
+    "preferredChannel": "Email",
+    "noShowCount": 1,
+    "totalVisits": 3,
+    "createdAt": "2025-04-01",
+    "isActive": true
+  },
+  {
+    "patientId": "PAT-008",
+    "fullName": "Khaled Youssef",
+    "phone": "+201187654321",
+    "email": "khaled@email.com",
+    "language": "AR",
+    "preferredChannel": "SMS",
+    "noShowCount": 2,
+    "totalVisits": 9,
+    "createdAt": "2024-12-15",
+    "isActive": true
+  }
+]
