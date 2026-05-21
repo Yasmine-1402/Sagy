@@ -54,10 +54,10 @@
     "dentistName": "Dr. Sarah Ahmed",
     "treatmentType": "Checkup",
     "status": "Scheduled",
-    "reminderSent": false,
+    "reminderSent": true,
     "notes": "",
     "createdAt": "2026-05-14T14:39:19.771Z",
-    "updatedAt": "2026-05-21T14:39:19.772Z"
+    "updatedAt": "2026-05-21T18:35:54.008Z"
   },
   {
     "appointmentId": "APT-20260523-6921",
@@ -68,11 +68,12 @@
     "duration": 45,
     "dentistName": "Dr. Omar Hassan",
     "treatmentType": "RootCanal",
-    "status": "Confirmed",
-    "reminderSent": false,
+    "status": "Cancelled",
+    "reminderSent": true,
     "notes": "",
     "createdAt": "2026-05-14T14:39:19.771Z",
-    "updatedAt": "2026-05-21T14:39:19.772Z"
+    "updatedAt": "2026-05-21T18:35:55.792Z",
+    "cancellationReason": "Cancelled from dashboard"
   },
   {
     "appointmentId": "APT-20260523-6592",
@@ -83,11 +84,11 @@
     "duration": 60,
     "dentistName": "Dr. Omar Hassan",
     "treatmentType": "Filling",
-    "status": "Scheduled",
+    "status": "Completed",
     "reminderSent": false,
     "notes": "",
     "createdAt": "2026-05-14T14:39:19.771Z",
-    "updatedAt": "2026-05-21T14:39:19.772Z"
+    "updatedAt": "2026-05-21T18:36:03.172Z"
   },
   {
     "appointmentId": "APT-20260523-3653",
@@ -403,5 +404,35 @@
     "notes": "",
     "createdAt": "2026-05-14T14:39:19.771Z",
     "updatedAt": "2026-05-21T14:39:19.772Z"
+  },
+  {
+    "appointmentId": "APT-20260524-347",
+    "patientId": "PAT-SH1EUF",
+    "patientName": "Yasmine Shehata",
+    "date": "2026-05-24",
+    "time": "10:00",
+    "duration": 30,
+    "dentistName": "Dr. Sarah Ahmed",
+    "treatmentType": "Checkup",
+    "notes": "",
+    "status": "Confirmed",
+    "reminderSent": true,
+    "createdAt": "2026-05-21T18:29:30.917Z",
+    "updatedAt": "2026-05-21T18:30:43.989Z"
+  },
+  {
+    "appointmentId": "APT-20260606-612",
+    "patientId": "PAT-SH1EUF",
+    "patientName": "Yasmine Shehata",
+    "date": "2026-06-06",
+    "time": "09:30",
+    "duration": 30,
+    "dentistName": "Dr. Omar Hassan",
+    "treatmentType": "Checkup",
+    "notes": "",
+    "status": "Completed",
+    "reminderSent": true,
+    "createdAt": "2026-05-21T18:39:10.810Z",
+    "updatedAt": "2026-05-21T19:04:17.758Z"
   }
 ]

@@ -259,6 +259,12 @@ app.post('/api/reminders/send/:appointmentId', async (req, res) => {
   if (!patient) return res.status(404).json({ success: false, error: 'Patient not found' });
 
   const type = req.body.type || '24h';
+  
+  // If the frontend explicitly requests an email, temporarily override the patient's preferred channel
+  if (req.body.forceChannel) {
+    patient.preferredChannel = req.body.forceChannel;
+  }
+
   const result = await sendReminder(appointment, patient, type);
   res.json({ success: result.success, data: result });
 });
@@ -334,13 +340,14 @@ function uipathAuth(req: express.Request, res: express.Response, next: express.N
 
 app.get('/api/uipath/pending-reminders', uipathAuth, (_req, res) => {
   const pending = dataStore.getPendingReminders(24);
-  // Flatten for UiPath's Deserialize JSON activity
+  // Flatten for UiPath's/n8n's Deserialize JSON activity
   const flat = pending.map(a => ({
     AppointmentID: a.appointmentId,
     PatientID: a.patientId,
     PatientName: a.patientName,
     Date: a.date,
     Time: a.time,
+    Duration: a.duration,
     DentistName: a.dentistName,
     TreatmentType: a.treatmentType,
     Status: a.status,

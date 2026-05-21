@@ -153,24 +153,47 @@ async function sendWhatsApp(to: string, body: string): Promise<SendResult> {
  * Send Email reminder
  */
 async function sendEmailReminder(to: string, textContent: string, appointment: Appointment): Promise<SendResult> {
-  // ── PRODUCTION CODE ──
-  // const nodemailer = require('nodemailer');
-  // const transporter = nodemailer.createTransport({
-  //   host: process.env.SMTP_HOST,
-  //   port: parseInt(process.env.SMTP_PORT || '587'),
-  //   auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-  // });
-  // await transporter.sendMail({
-  //   from: process.env.SMTP_FROM,
-  //   to,
-  //   subject: `Dental Appointment Reminder - ${appointment.date}`,
-  //   text: textContent,
-  //   html: buildEmailHTML(textContent, appointment),
-  // });
+  try {
+    const nodemailer = require('nodemailer');
+    let transporter;
+    
+    // Check if real SMTP credentials are in .env
+    if (process.env.SMTP_HOST && process.env.SMTP_USER) {
+      transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: parseInt(process.env.SMTP_PORT || '587'),
+        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+      });
+    } else {
+      // Create a test account to actually view emails online without setup
+      console.log('Generating Ethereal test email account...');
+      const testAccount = await nodemailer.createTestAccount();
+      transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false,
+        auth: { user: testAccount.user, pass: testAccount.pass },
+      });
+    }
 
-  // ── DEMO MODE ──
-  console.log(`📧 Email → ${to}: ${textContent.substring(0, 50)}...`);
-  return { success: true, messageId: `EMAIL-${Date.now()}` };
+    const info = await transporter.sendMail({
+      from: process.env.SMTP_FROM || '"DentFlow Clinic" <no-reply@dentflow.local>',
+      to,
+      subject: `Dental Appointment Reminder - ${appointment.date}`,
+      text: textContent,
+    });
+
+    const previewUrl = nodemailer.getTestMessageUrl(info);
+    if (previewUrl) {
+      console.log(`\n📧 Email sent to ${to}! \n🌐 View the actual email here: ${previewUrl}\n`);
+    } else {
+      console.log(`📧 Email sent to ${to}!`);
+    }
+    return { success: true, messageId: info.messageId };
+  } catch (error: any) {
+    console.error('Email error:', error);
+    return { success: false, error: error.message };
+  }
 }
 
 /**

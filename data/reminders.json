@@ -34,5 +34,113 @@
     "status": "Sent",
     "messageContent": "Reminder: Your dental appointment is tomorrow.",
     "retryCount": 0
+  },
+  {
+    "reminderId": "REM-MPFTTG5TV3UZ",
+    "appointmentId": "APT-20260524-347",
+    "patientId": "PAT-SH1EUF",
+    "patientName": "Yasmine Shehata",
+    "channel": "SMS",
+    "type": "24h",
+    "messageContent": "🦷 Reminder: Your dental appointment with Dr. Dr. Sarah Ahmed is tomorrow (2026-05-24) at 10:00. Reply C to confirm or R to reschedule.",
+    "sentAt": "2026-05-21T18:30:43.985Z",
+    "status": "Sent",
+    "retryCount": 0
+  },
+  {
+    "reminderId": "REM-MPFU03DEL8XD",
+    "appointmentId": "APT-20260523-4510",
+    "patientId": "PAT-007",
+    "patientName": "Emily Davis",
+    "channel": "Email",
+    "type": "24h",
+    "messageContent": "🦷 Reminder: Your dental appointment with Dr. Dr. Sarah Ahmed is tomorrow (2026-05-23) at 09:00. Reply C to confirm or R to reschedule.",
+    "sentAt": "2026-05-21T18:35:54.003Z",
+    "status": "Sent",
+    "retryCount": 0
+  },
+  {
+    "reminderId": "REM-MPFU04QVEFEE",
+    "appointmentId": "APT-20260523-6921",
+    "patientId": "PAT-006",
+    "patientName": "Nour ElDin",
+    "channel": "WhatsApp",
+    "type": "Cancellation",
+    "messageContent": "❌ تم إلغاء موعدك يوم 2026-05-23. اتصل بـ +201000000000 لإعادة الحجز.",
+    "sentAt": "2026-05-21T18:35:55.783Z",
+    "status": "Sent",
+    "retryCount": 0
+  },
+  {
+    "reminderId": "REM-MPFU4DV6ZY70",
+    "appointmentId": "APT-20260606-612",
+    "patientId": "PAT-SH1EUF",
+    "patientName": "Yasmine Shehata",
+    "channel": "SMS",
+    "type": "24h",
+    "messageContent": "🦷 Reminder: Your dental appointment with Dr. Dr. Omar Hassan is tomorrow (2026-06-06) at 09:30. Reply C to confirm or R to reschedule.",
+    "sentAt": "2026-05-21T18:39:14.226Z",
+    "status": "Sent",
+    "retryCount": 0
+  },
+  {
+    "reminderId": "REM-MPFUB30HN94W",
+    "appointmentId": "APT-20260606-612",
+    "patientId": "PAT-SH1EUF",
+    "patientName": "Yasmine Shehata",
+    "channel": "SMS",
+    "type": "24h",
+    "messageContent": "🦷 Reminder: Your dental appointment with Dr. Dr. Omar Hassan is tomorrow (2026-06-06) at 09:30. Reply C to confirm or R to reschedule.",
+    "sentAt": "2026-05-21T18:44:26.753Z",
+    "status": "Sent",
+    "retryCount": 0
+  },
+  {
+    "reminderId": "REM-MPFUB3WYM9PX",
+    "appointmentId": "APT-20260606-612",
+    "patientId": "PAT-SH1EUF",
+    "patientName": "Yasmine Shehata",
+    "channel": "SMS",
+    "type": "24h",
+    "messageContent": "🦷 Reminder: Your dental appointment with Dr. Dr. Omar Hassan is tomorrow (2026-06-06) at 09:30. Reply C to confirm or R to reschedule.",
+    "sentAt": "2026-05-21T18:44:27.922Z",
+    "status": "Sent",
+    "retryCount": 0
+  },
+  {
+    "reminderId": "REM-MPFV03ZGKCZP",
+    "appointmentId": "APT-20260606-612",
+    "patientId": "PAT-SH1EUF",
+    "patientName": "Yasmine Shehata",
+    "channel": "Email",
+    "type": "24h",
+    "messageContent": "🦷 Reminder: Your dental appointment with Dr. Dr. Omar Hassan is tomorrow (2026-06-06) at 09:30. Reply C to confirm or R to reschedule.",
+    "sentAt": "2026-05-21T19:03:54.412Z",
+    "status": "Sent",
+    "retryCount": 0
+  },
+  {
+    "reminderId": "REM-MPFV0KZ99XTZ",
+    "appointmentId": "APT-20260606-612",
+    "patientId": "PAT-SH1EUF",
+    "patientName": "Yasmine Shehata",
+    "channel": "Email",
+    "type": "24h",
+    "messageContent": "🦷 Reminder: Your dental appointment with Dr. Dr. Omar Hassan is tomorrow (2026-06-06) at 09:30. Reply C to confirm or R to reschedule.",
+    "sentAt": "2026-05-21T19:04:16.437Z",
+    "status": "Sent",
+    "retryCount": 0
+  },
+  {
+    "reminderId": "REM-MPFV0LJME450",
+    "appointmentId": "APT-20260606-612",
+    "patientId": "PAT-SH1EUF",
+    "patientName": "Yasmine Shehata",
+    "channel": "Email",
+    "type": "24h",
+    "messageContent": "🦷 Reminder: Your dental appointment with Dr. Dr. Omar Hassan is tomorrow (2026-06-06) at 09:30. Reply C to confirm or R to reschedule.",
+    "sentAt": "2026-05-21T19:04:17.170Z",
+    "status": "Sent",
+    "retryCount": 0
   }
 ]

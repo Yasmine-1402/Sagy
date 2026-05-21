@@ -66,6 +66,8 @@ export default function AppointmentsPage() {
     patientId: '', patientName: '', date: '', time: '09:00',
     duration: 30, dentistName: '', treatmentType: 'Checkup', notes: '',
   });
+  const [isNewPatient, setIsNewPatient] = useState(false);
+  const [newPatient, setNewPatient] = useState({ fullName: '', phone: '', email: '' });
 
   const fetchData = useCallback(async () => {
     try {
@@ -104,14 +106,36 @@ export default function AppointmentsPage() {
   };
 
   const handleSendReminder = async (id: string) => {
-    await fetch(`${API_URL}/reminders/send/${id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: '24h' }) });
+    await fetch(`${API_URL}/reminders/send/${id}`, { 
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' }, 
+      body: JSON.stringify({ type: '24h', forceChannel: 'Email' }) 
+    });
     fetchData();
   };
 
   const handleCreateAppointment = async () => {
     setConflictReport(null);
+    let finalPatientId = form.patientId;
+    let finalPatientName = form.patientName;
+
+    if (isNewPatient) {
+      const pRes = await fetch(`${API_URL}/patients`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newPatient),
+      });
+      const pData = await pRes.json();
+      if (!pData.success) {
+        alert(pData.error || 'Failed to create patient');
+        return;
+      }
+      finalPatientId = pData.data.patientId;
+      finalPatientName = pData.data.fullName;
+    }
+
     // Check conflicts first
-    const conflictRes = await fetch(`${API_URL}/appointments/conflicts?date=${form.date}&time=${form.time}&duration=${form.duration}&dentist=${encodeURIComponent(form.dentistName)}&patientId=${form.patientId}`);
+    const conflictRes = await fetch(`${API_URL}/appointments/conflicts?date=${form.date}&time=${form.time}&duration=${form.duration}&dentist=${encodeURIComponent(form.dentistName)}&patientId=${finalPatientId}`);
     const conflictData = await conflictRes.json();
     if (conflictData.data?.hasConflict) {
       setConflictReport(conflictData.data);
@@ -121,10 +145,12 @@ export default function AppointmentsPage() {
     await fetch(`${API_URL}/appointments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, patientId: finalPatientId, patientName: finalPatientName }),
     });
     setShowModal(false);
     setForm({ patientId: '', patientName: '', date: '', time: '09:00', duration: 30, dentistName: '', treatmentType: 'Checkup', notes: '' });
+    setIsNewPatient(false);
+    setNewPatient({ fullName: '', phone: '', email: '' });
     setConflictReport(null);
     fetchData();
   };
@@ -294,14 +320,27 @@ export default function AppointmentsPage() {
 
               <div className="grid-2">
                 <div className="form-group">
-                  <label className="form-label">Patient</label>
-                  <select className="form-select" value={form.patientId} onChange={e => {
-                    const p = patients.find(p => p.patientId === e.target.value);
-                    setForm(f => ({ ...f, patientId: e.target.value, patientName: p?.fullName || '' }));
-                  }}>
-                    <option value="">Select patient...</option>
-                    {patients.map(p => <option key={p.patientId} value={p.patientId}>{p.fullName}</option>)}
-                  </select>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <label className="form-label" style={{ marginBottom: 0 }}>Patient</label>
+                    <button className="btn-sm" style={{ background: 'none', border: 'none', color: 'var(--accent-blue)', cursor: 'pointer', padding: 0 }} onClick={() => setIsNewPatient(!isNewPatient)}>
+                      {isNewPatient ? 'Select Existing' : '+ New Patient'}
+                    </button>
+                  </div>
+                  {isNewPatient ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <input type="text" className="form-input" placeholder="Full Name" value={newPatient.fullName} onChange={e => setNewPatient({ ...newPatient, fullName: e.target.value })} />
+                      <input type="text" className="form-input" placeholder="Phone (e.g. +1234567890)" value={newPatient.phone} onChange={e => setNewPatient({ ...newPatient, phone: e.target.value })} />
+                      <input type="email" className="form-input" placeholder="Email" value={newPatient.email} onChange={e => setNewPatient({ ...newPatient, email: e.target.value })} />
+                    </div>
+                  ) : (
+                    <select className="form-select" value={form.patientId} onChange={e => {
+                      const p = patients.find(p => p.patientId === e.target.value);
+                      setForm(f => ({ ...f, patientId: e.target.value, patientName: p?.fullName || '' }));
+                    }}>
+                      <option value="">Select patient...</option>
+                      {patients.map(p => <option key={p.patientId} value={p.patientId}>{p.fullName}</option>)}
+                    </select>
+                  )}
                 </div>
                 <div className="form-group">
                   <label className="form-label">Dentist</label>
@@ -348,8 +387,8 @@ export default function AppointmentsPage() {
               </div>
             </div>
             <div className="modal-footer">
-              <button className="btn btn-secondary" onClick={() => { setShowModal(false); setConflictReport(null); }}>Cancel</button>
-              <button className="btn btn-primary" onClick={handleCreateAppointment} disabled={!form.patientId || !form.date || !form.dentistName}>
+              <button className="btn btn-secondary" onClick={() => { setShowModal(false); setConflictReport(null); setIsNewPatient(false); }}>Cancel</button>
+              <button className="btn btn-primary" onClick={handleCreateAppointment} disabled={(isNewPatient ? (!newPatient.fullName || !newPatient.phone || !newPatient.email) : !form.patientId) || !form.date || !form.dentistName}>
                 Create Appointment
               </button>
             </div>
